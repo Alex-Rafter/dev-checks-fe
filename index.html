@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <section id="report">
+        <table v-scope id="myTable" class="charts-css column multiple datasets-spacing-1 show-primary-axis show-5-secondary-axes show-data-on-hover">
+            <tbody>
+
+                <tr v-for="item in items">
+                    <th scope="row"> {{ item.url }} </th>
+                    <td v-bind:style="styleS(item.len)">
+                        <span class="data">
+                            Images: {{ item.len }}
+                        </span>
+                    </td>
+                    <td v-bind:style="styleS(item.mLen)">
+                      <span class="data">
+                          Meta {{ item.mLen }}
+                      </span>
+                  </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <ul class="charts-css legend legend-circle">
+          <li> Images </li>
+          <li> Meta </li>
+        </ul>
+
+    </section>
+    <!-- /#report -->
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+        const dataJ = getText("/data/data.json")
+        async function getText(file) {
+  let myObject = await fetch(file);
+  let myText = await myObject.text();
+  const d = JSON.parse(myText)
+  const x = []
+  d.map(item => {
+    item.len = (item.images === undefined) ? 0 : item.images.length
+    item.mLen = (item.meta === undefined) ? 0 : item.meta.length
+    x.push(item)
+  })
+  // console.log(x)
+
+  createApp({
+  items: d,
+  styleS(l) {
+    return `--size : calc(${l} / 10)`
+  }
+}).mount('#report')
+}
+ 
+
+
+      </script>
+</body>
+
+</html>

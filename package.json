@@ -1,0 +1,22 @@
+{
+  "name": "dev-checks-fe",
+  "version": "1.0.0",
+  "description": "prototype fe for dev checks project",
+  "main": "index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex-Rafter/dev-checks-fe.git"
+  },
+  "keywords": [
+    "dev-checks"
+  ],
+  "author": "alex rafter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alex-Rafter/dev-checks-fe/issues"
+  },
+  "homepage": "https://github.com/Alex-Rafter/dev-checks-fe#readme"
+}
